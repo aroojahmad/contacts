@@ -21,13 +21,8 @@ defmodule ContactsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/list", ContactController, :index
 
-    live "/contacts", ContactLive.Index, :index
-      live "/contacts/new", ContactLive.Index, :new
-      live "/contacts/:id/edit", ContactLive.Index, :edit
-
-      live "/contacts/:id", ContactLive.Show, :show
-      live "/contacts/:id/show/edit", ContactLive.Show, :edit
 
   end
 
@@ -83,6 +78,13 @@ defmodule ContactsWeb.Router do
 
   scope "/", ContactsWeb do
     pipe_through [:browser, :require_authenticated_user]
+
+    live "/contacts", ContactLive.Index, :index
+    live "/contacts/new", ContactLive.Index, :new
+    live "/contacts/:id/edit", ContactLive.Index, :edit
+
+    live "/contacts/:id", ContactLive.Show, :show
+    live "/contacts/:id/show/edit", ContactLive.Show, :edit
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

@@ -2,6 +2,8 @@ defmodule Contacts.CRM.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:email, :name, :phone_number, :title]}
+
   schema "contacts" do
     field :email, :string
     field :name, :string
